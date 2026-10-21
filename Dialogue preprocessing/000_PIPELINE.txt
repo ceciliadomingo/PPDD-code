@@ -1,0 +1,56 @@
+(* Indicates file name used to carry out step)
+TRANSCRIPTION
+	- REMOVE LINE NUMBERS AND BLANK LINES from whisper srt files using regex. Check that all subtitle lines are single lines:
+		* REGEX TO CLEAN SRT FILES 
+
+DIARIZATION
+	* Diarization with pyannote
+
+CREATE JSON FROM TRANSCRIPT
+	* Create annotation json
+
+ADD SPEAKER LABELS FROM DIARIZATION
+	* CONVERT DIARIZATION INTO MINUTES 
+	The script takes as input the rttm file and does the following:
+			- Remove NA
+			- Convert diarization into minutes
+	- Manually change speaker labels into our own using Notepad
+	* COMBINE JSON WITH DIARIZATION
+	* REORGANISE TRANSCRIPTS CHRONOLOGICALLY AFTER DIARISATION
+	Backchannels may appear disorganised due to the limitations of Subtitle Edit,
+	so we need to reorganise them chronologically before adding any more objects inside the json.
+	- Backup file and manually revise speakers
+
+ADD KEYLOG RECORDS
+	- Preprocess keylog records
+			RUI data:
+				* CONVERT XML TO CSV FOR KEYLOG
+				* CONVERT TXT KEYLOG TO COMPLETE EXCEL WITH PANDAS
+				* REGEX TO MAKE XY INTEGERS AND CHANGE TIME TO COLON
+			MAC keylogger data from pilot:
+				* CONVERT XML TO CSV FOR KEYLOG
+				* CONVERT TXT KEYLOG TO COMPLETE EXCEL WITH PANDAS
+				* MERGE MAC KEYLOG
+				* ORDER MERGED MAC CSV BY TIMESTAMPS AND FORMAT THEM
+			OUR keylogger data:
+				- Manually trim mouse and key files and merge them using Notepad
+				* CONVERT OUR KEYLOG TO CSV TO THEN CONVERT TO RELATIVE
+				* REGEX TO MAKE XY INTEGERS AND CHANGE TIME TO COLON
+	* CONVERT KEYLOG TIME TO RELATIVE
+	- RUI records only: * CONVERT KEYLOG TIME FORMAT TO COLON
+	* REDUCE KEYLOG GRANULARITY 
+	This script organises the records chronologically too
+
+	* ADD KEYLOGGER TO JSON
+
+ADD CODE
+	* CREATE CODE TREES
+	* ADD CODE AND TREES TO JSON
+	Requires finding an anchoring timestamp to make code timestamps relative.
+
+EXTRACT F0
+	* EXTRACT F0
+	* ADD F0 TO JSON
+
+ADD TURN ID TO EACH TURN
+	* ADDING TURN ID

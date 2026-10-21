@@ -1,0 +1,11 @@
+The files included here were used for part of the anonymisation pipeline
+- IMAGE_CROPPER --> Used to remove parts of screenshots from participants' screen that showed anything personal (e.g., browser tab names)
+- VOICE_ANONYMISATION --> Used to perform voice conversion on audio files
+
+Other anonymisation steps were carried out manually:
+- Bleeping names on audio files done using Audacity
+- Silencing names on video files done with DaVinci Resolve
+- Blurring video frames and covering any personal details on video files done with DaVinci Resolve
+- Deleting screenshots where most of the information was personal (i.e., cropping is not enough) done manually (e.g., screenshots of Desktop)
+- Deleting names in survey responses done in Excel
+- Video voice filtering (pitch, timbre, noise and distortion effects) done with DaVinci Resolve 

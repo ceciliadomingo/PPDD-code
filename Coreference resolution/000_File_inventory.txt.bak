@@ -1,0 +1,7 @@
+00_CR_PROMPTING_PIPELINE --> Main file for coreference resolution experiments.
+It loads functions from the files:
+	- CR_QP_EXTRACTION --> Extracts the information needed for prompting the models (dialogue history, multimodal data, mentions)
+	- SCREENSHOT_PROCESSING --> Obtains multimodal features. For the main pipeline file, it gives it the screen resolution.
+	When run as a main file, it prompts an LLM to convert code screenshots into text-format code with cursor tags.
+	- EVALUATION_CONLL --> Takes the coreference chain built from the model output and return CoNLL scores
+	- CLEANING_SCRIPTS --> Filters the output from the LLM to remedy some types of halluciantions

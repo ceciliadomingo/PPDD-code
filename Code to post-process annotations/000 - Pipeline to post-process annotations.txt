@@ -1,0 +1,20 @@
+The pipeline is managed through the file 000 - PIPELINE, which imports funcitons from the files:
+- ADD_ROWID_AND_FIX_PUNCT_AND_BLEEPS --> Contains functions to add an identifier to each annotation, to remove trailing punctuation in mentions, and to normalise the mentions to bleeped names.
+The trailing punctuation appeared as a results of our annotation settings in LabelStudio which didn't allow for annotations to be less than one word.
+We preferred to have easily removed trailing punctuation rather than risk having missing characters from human errors.
+Bleeped names appear as (BLEEP) in our transcript, so we wanted to ensure all isntances had the same punctuation
+- FIX_INCOMPLETES --> This extracts the mentions labelled as split mentions
+- CHECK_MULTISPEAKER_IN_INCOMPLETE_JSON --> This checks if split mentions are completed by different speakers
+- ADD_INCOMPLETE_ROW --> This adds information about a mention ebing split without needing to have duplicate entries 
+(one for the gramamtical form annotation and one for the split mention annotation, as both layers were annotated with the same tool)
+- READ_DICTATE --> This removes duplicates where a mention is labelled as read-out code and also as a more specific category (e.g., name, when only a variable name is read out).
+- CREATE_MENTIONS_JSON --> This creates the structure of the coreference chains json file
+- ADD_SPEAKER_REFERENCES_TO_JSON --> This adds mentions to speakers to the coreference chains json file. 
+Coreference for these mentions was not annotated manually to save time and effort; we use a simple algorithm to link thema utomatically based on the pronoun and the speaker who uttered it
+(e.g., if speaker A says "I" and speaker B says "you", those are very likely to corefer
+- CHAIN_UP_MENTIONS_FROM_JSON --> This links the mentions that have been annotated for coreference. We use the transitivity property of mentions linked by equivalence:
+if C is linked to B and B is linked to A, [A, B, C] is a coreference chain.
+ADD_CATAPHORA_AND_FIRST_MENTION --> This analyses which mention in each coreference chain is chronologically the first. It also analyses the presence of cataphora:
+we label a referring expression as cataphora if it's the chronologically first mention in a chain but in the annotation it is linked to a mention later in the dialogue
+(instead of that later mention being linked back to the earlier mention, as most mentions are)
+- CORRECT_NOT_CODE --> This fixes human errors/differences in judgement where a mention was labelled to not referred to code but later an annotator linked it to a code segment

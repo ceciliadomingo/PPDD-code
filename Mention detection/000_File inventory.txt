@@ -1,0 +1,20 @@
+* 00_MENTION_DETECTION_PIPELINE.py --> Main file with pipeline to perform mention detection
+It imports functions from the files:
+	- CALL_BEDROCK --> Function to call AWS models
+	- CALL_GPT --> Function to call OpenAI models
+	- CONVERT_DEFAULTDICT --> Function to fix json formatting issues
+	- CONVERT_TURN_TO_FEW_SHOT_FOR_MD_SIMBASED_EVAL --> Function to extract query points for the mention detection pipeline. 
+	It extracts the best few-shot examples for each input turn from the available pool using sentence similarity.
+	- MENTION_DETECTION_EVALUATION --> Evaluates mention-detection results
+	- EVALUATE_MD_WITH_MIN --> Evaluates mention-detection results using a more lenient method that does not require exact span matches
+	- CONVERT_TO_HEAD_MENTIONS --> Script to convert mention detection few-shot examples into mention-head detection examples. 
+	It is activated when doing_mention_head_detection is set to True
+
+* 01_CLEAN_OUTPUT --> Script to clean output files after mention detection
+	- EVALUATE_CLEANED_FILES --> Performs a new evaluation using the cleaned output.
+	
+
+	
+* 02_EVALUATE_MENTION_HEAD_DETECTION_WITH_SPACY --> Script to evaluate the outputs when the mention-deteciton pipeline is run using a prompt that focuses on mention head detection.
+It imports functions from the file:
+	- SPACY_SPAN_EXPANDER --> Uses SpaCy to convert the mention heads from the output files into full spans for evaluation against ground-truth spans.

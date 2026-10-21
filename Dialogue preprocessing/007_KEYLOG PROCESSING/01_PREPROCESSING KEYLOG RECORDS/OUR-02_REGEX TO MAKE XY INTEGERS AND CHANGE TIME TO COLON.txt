@@ -1,0 +1,25 @@
+Remove BLANK
+
+Make x and y coordinates integers instead of floats ending in .0
+(Move,,,,\d\d\d).0(,\d\d\d).0
+$1$2
+
+
+Replace milisecond dot in timestamp with colon
+(\d\d:\d\d:\d\d).(\d\d\d,)
+$1:$2
+
+Check instances of " ,Pressed"
+	(If there are six decimals instead of three)
+	(\d\d:\d\d:\d\d).(\d\d\d)\d\d\d,
+	$1:$2,
+
+	(If there is a space before the comma, may appear with mouse)
+	(\d\d:\d\d:\d\d).(\d\d\d)\d\d\d ,
+	$1:$2,
+
+Add T to timestamp from Mac keylogger or OUR
+2023-05-22 
+2023-05-22T
+Then remove space between T and hour
+Delete 'before year
